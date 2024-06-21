@@ -14,7 +14,7 @@ compute:
   instance: oci.bm.gpu.h100.8
 integrations:
   - integration_type: git_repo
-    git_repo: kushal-kodnad_data/chronos-forecasting-old
+    git_repo: kushalkodn-db/chronos-forecasting-old
 
 command: |2-
 
