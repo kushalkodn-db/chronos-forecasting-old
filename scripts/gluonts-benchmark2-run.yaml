@@ -1,0 +1,30 @@
+name: gluonts-benchmark2-run
+image: mosaicml/pretraining:latest
+compute:
+  gpus: 16
+  nodes: 2
+  # cluster: r9z3
+  # gpu_type: h100_80gb
+  # instance: coreweave.h100-80
+  # cluster: r14z3
+  # gpu_type: h100_80gb
+  # instance: crusoe.h100-80gb-sxm-ib.8x
+  cluster: r15z4p1
+  gpu_type: h100_80gb
+  instance: oci.bm.gpu.h100.8
+integrations:
+  - integration_type: git_repo
+    git_repo: kushal-kodnad_data/chronos-forecasting-reproduction-old
+
+command: |2-
+
+      pip install pandas==2.1.4
+      pip install gluonts pandas~=2.1.4
+      pip install xlrd==2.0.1
+      cd chronos-forecasting-reproduction-old
+      mkdir ~/.gluonts
+      mkdir ~/.gluonts/datasets
+      mv ./scripts/M3C.xls ~/.gluonts/datasets/M3C.xls
+      ls ~/.gluonts
+      ls ~/.gluonts/datasets
+      python3 scripts/gluonts_benchmark2.py

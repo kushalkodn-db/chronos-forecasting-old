@@ -1,0 +1,79 @@
+name: forecasting-run-pretrained
+image: mosaicml/pretraining:latest
+compute:
+  gpus: 16
+  nodes: 2
+  # cluster: r9z3
+  # gpu_type: h100_80gb
+  # instance: coreweave.h100-80
+  cluster: r14z3
+  gpu_type: h100_80gb
+  instance: crusoe.h100-80gb-sxm-ib.8x
+  # cluster: r15z4p1
+  # gpu_type: h100_80gb
+  # instance: oci.bm.gpu.h100.8
+integrations:
+  - integration_type: git_repo
+    git_repo: kushal-kodnad_data/chronos-forecasting-finetune
+
+command: |2-
+
+      pip install awscli
+      cd chronos-forecasting-finetune
+      ls ./scripts/finetuning_csv/
+      # aws s3 cp s3://mosaicml-internal-checkpoints-shared/kushal/chronos-finetuning-data-small/australian_electricity_demand_dataset_train.csv ./scripts/finetuning_csv/australian_electricity_demand_dataset_train.csv
+      # aws s3 cp s3://mosaicml-internal-checkpoints-shared/kushal/chronos-finetuning-data-small/car_parts_dataset_with_missing_values_train.csv ./scripts/finetuning_csv/car_parts_dataset_with_missing_values_train.csv
+      # aws s3 cp s3://mosaicml-internal-checkpoints-shared/kushal/chronos-finetuning-data-small/cif_2016_dataset_train.csv ./scripts/finetuning_csv/cif_2016_dataset_train.csv
+      # aws s3 cp s3://mosaicml-internal-checkpoints-shared/kushal/chronos-finetuning-data-small/covid_deaths_dataset_train.csv ./scripts/finetuning_csv/covid_deaths_dataset_train.csv
+      # aws s3 cp s3://mosaicml-internal-checkpoints-shared/kushal/chronos-finetuning-data-small/ERCOT_load_2004_2021Sept_train.csv ./scripts/finetuning_csv/ERCOT_load_2004_2021Sept_train.csv
+      # aws s3 cp s3://mosaicml-internal-checkpoints-shared/kushal/chronos-finetuning-data-small/ETT_15min_train.csv ./scripts/finetuning_csv/ETT_15min_train.csv
+      # aws s3 cp s3://mosaicml-internal-checkpoints-shared/kushal/chronos-finetuning-data-small/ETT_hourly_train.csv ./scripts/finetuning_csv/ETT_hourly_train.csv
+      # aws s3 cp s3://mosaicml-internal-checkpoints-shared/kushal/chronos-finetuning-data-small/exchange_rate_train.csv ./scripts/finetuning_csv/exchange_rate_train.csv
+      # aws s3 cp s3://mosaicml-internal-checkpoints-shared/kushal/chronos-finetuning-data-small/fred_md_dataset_train.csv ./scripts/finetuning_csv/fred_md_dataset_train.csv
+      # aws s3 cp s3://mosaicml-internal-checkpoints-shared/kushal/chronos-finetuning-data-small/hospital_dataset_train.csv ./scripts/finetuning_csv/hospital_dataset_train.csv
+      # aws s3 cp s3://mosaicml-internal-checkpoints-shared/kushal/chronos-finetuning-data-small/m1_monthly_dataset_train.csv ./scripts/finetuning_csv/m1_monthly_dataset_train.csv
+      # aws s3 cp s3://mosaicml-internal-checkpoints-shared/kushal/chronos-finetuning-data-small/m1_quarterly_dataset_train.csv ./scripts/finetuning_csv/m1_quarterly_dataset_train.csv
+      # aws s3 cp s3://mosaicml-internal-checkpoints-shared/kushal/chronos-finetuning-data-small/m1_yearly_dataset_train.csv ./scripts/finetuning_csv/m1_yearly_dataset_train.csv
+      # aws s3 cp s3://mosaicml-internal-checkpoints-shared/kushal/chronos-finetuning-data-small/m3_monthly_dataset_train.csv ./scripts/finetuning_csv/m3_monthly_dataset_train.csv
+      # aws s3 cp s3://mosaicml-internal-checkpoints-shared/kushal/chronos-finetuning-data-small/m3_quarterly_dataset_train.csv ./scripts/finetuning_csv/m3_quarterly_dataset_train.csv
+      # aws s3 cp s3://mosaicml-internal-checkpoints-shared/kushal/chronos-finetuning-data-small/m3_yearly_dataset_train.csv ./scripts/finetuning_csv/m3_yearly_dataset_train.csv
+      # aws s3 cp s3://mosaicml-internal-checkpoints-shared/kushal/chronos-finetuning-data-small/m4_quarterly_dataset_train.csv ./scripts/finetuning_csv/m4_quarterly_dataset_train.csv
+      # aws s3 cp s3://mosaicml-internal-checkpoints-shared/kushal/chronos-finetuning-data-small/m4_yearly_dataset_train.csv ./scripts/finetuning_csv/m4_yearly_dataset_train.csv
+      # aws s3 cp s3://mosaicml-internal-checkpoints-shared/kushal/chronos-finetuning-data-small/m5_dataset_train.csv ./scripts/finetuning_csv/m5_dataset_train.csv
+      # aws s3 cp s3://mosaicml-internal-checkpoints-shared/kushal/chronos-finetuning-data-small/nn5_daily_dataset_train.csv ./scripts/finetuning_csv/nn5_daily_dataset_train.csv
+      # aws s3 cp s3://mosaicml-internal-checkpoints-shared/kushal/chronos-finetuning-data-small/nn5_weekly_dataset_train.csv ./scripts/finetuning_csv/nn5_weekly_dataset_train.csv
+      # aws s3 cp s3://mosaicml-internal-checkpoints-shared/kushal/chronos-finetuning-data-small/tourism_monthly_dataset_train.csv ./scripts/finetuning_csv/tourism_monthly_dataset_train.csv
+      # aws s3 cp s3://mosaicml-internal-checkpoints-shared/kushal/chronos-finetuning-data-small/tourism_quarterly_dataset_train.csv ./scripts/finetuning_csv/tourism_quarterly_dataset_train.csv
+      # aws s3 cp s3://mosaicml-internal-checkpoints-shared/kushal/chronos-finetuning-data-small/tourism_yearly_dataset_train.csv ./scripts/finetuning_csv/tourism_yearly_dataset_train.csv
+      # aws s3 cp s3://mosaicml-internal-checkpoints-shared/kushal/chronos-finetuning-data-small/traffic_hourly_dataset_train.csv ./scripts/finetuning_csv/traffic_hourly_dataset_train.csv
+      # aws s3 cp s3://mosaicml-internal-checkpoints-shared/kushal/chronos-finetuning-data-small/weather_dataset_new_train.csv ./scripts/finetuning_csv/weather_dataset_new_train.csv
+
+      # aws s3 cp s3://mosaicml-internal-checkpoints-shared/kushal/chronos-zeroshot-data/australian_electricity_demand_dataset_zeroshot_train.csv ./scripts/finetuning_csv/australian_electricity_demand_dataset_zeroshot_train.csv
+      # aws s3 cp s3://mosaicml-internal-checkpoints-shared/kushal/chronos-zeroshot-data/car_parts_dataset_with_missing_values_zeroshot_train.csv ./scripts/finetuning_csv/car_parts_dataset_with_missing_values_zeroshot_train.csv
+      # aws s3 cp s3://mosaicml-internal-checkpoints-shared/kushal/chronos-zeroshot-data/cif_2016_dataset_zeroshot_train.csv ./scripts/finetuning_csv/cif_2016_dataset_zeroshot_train.csv
+      # aws s3 cp s3://mosaicml-internal-checkpoints-shared/kushal/chronos-zeroshot-data/covid_deaths_dataset_zeroshot_train.csv ./scripts/finetuning_csv/covid_deaths_dataset_zeroshot_train.csv
+      # aws s3 cp s3://mosaicml-internal-checkpoints-shared/kushal/chronos-zeroshot-data/ERCOT_load_2004_2021Sept_zeroshot_train.csv ./scripts/finetuning_csv/ERCOT_load_2004_2021Sept_zeroshot_train.csv
+      # aws s3 cp s3://mosaicml-internal-checkpoints-shared/kushal/chronos-zeroshot-data/ETT_15min_zeroshot_train.csv ./scripts/finetuning_csv/ETT_15min_zeroshot_train.csv
+      # aws s3 cp s3://mosaicml-internal-checkpoints-shared/kushal/chronos-zeroshot-data/ETT_hourly_zeroshot_train.csv ./scripts/finetuning_csv/ETT_hourly_zeroshot_train.csv
+      # aws s3 cp s3://mosaicml-internal-checkpoints-shared/kushal/chronos-zeroshot-data/exchange_rate_zeroshot_train.csv ./scripts/finetuning_csv/exchange_rate_zeroshot_train.csv
+      # aws s3 cp s3://mosaicml-internal-checkpoints-shared/kushal/chronos-zeroshot-data/fred_md_dataset_zeroshot_train.csv ./scripts/finetuning_csv/fred_md_dataset_zeroshot_train.csv
+      # aws s3 cp s3://mosaicml-internal-checkpoints-shared/kushal/chronos-zeroshot-data/hospital_dataset_zeroshot_train.csv ./scripts/finetuning_csv/hospital_dataset_zeroshot_train.csv
+      # aws s3 cp s3://mosaicml-internal-checkpoints-shared/kushal/chronos-zeroshot-data/m1_monthly_dataset_zeroshot_train.csv ./scripts/finetuning_csv/m1_monthly_dataset_zeroshot_train.csv
+      # aws s3 cp s3://mosaicml-internal-checkpoints-shared/kushal/chronos-zeroshot-data/m1_quarterly_dataset_zeroshot_train.csv ./scripts/finetuning_csv/m1_quarterly_dataset_zeroshot_train.csv
+      # aws s3 cp s3://mosaicml-internal-checkpoints-shared/kushal/chronos-zeroshot-data/m1_yearly_dataset_zeroshot_train.csv ./scripts/finetuning_csv/m1_yearly_dataset_zeroshot_train.csv
+      # aws s3 cp s3://mosaicml-internal-checkpoints-shared/kushal/chronos-zeroshot-data/m3_monthly_dataset_zeroshot_train.csv ./scripts/finetuning_csv/m3_monthly_dataset_zeroshot_train.csv
+      # aws s3 cp s3://mosaicml-internal-checkpoints-shared/kushal/chronos-zeroshot-data/m3_quarterly_dataset_zeroshot_train.csv ./scripts/finetuning_csv/m3_quarterly_dataset_zeroshot_train.csv
+      # aws s3 cp s3://mosaicml-internal-checkpoints-shared/kushal/chronos-zeroshot-data/m3_yearly_dataset_zeroshot_train.csv ./scripts/finetuning_csv/m3_yearly_dataset_zeroshot_train.csv
+      aws s3 cp s3://mosaicml-internal-checkpoints-shared/kushal/chronos-zeroshot-data/m4_quarterly_dataset_zeroshot_train.csv ./scripts/finetuning_csv/m4_quarterly_dataset_zeroshot_train.csv
+      aws s3 cp s3://mosaicml-internal-checkpoints-shared/kushal/chronos-zeroshot-data/m4_yearly_dataset_zeroshot_train.csv ./scripts/finetuning_csv/m4_yearly_dataset_zeroshot_train.csv
+      aws s3 cp s3://mosaicml-internal-checkpoints-shared/kushal/chronos-zeroshot-data/m5_dataset_zeroshot_train.csv ./scripts/finetuning_csv/m5_dataset_zeroshot_train.csv
+      # aws s3 cp s3://mosaicml-internal-checkpoints-shared/kushal/chronos-zeroshot-data/nn5_daily_dataset_zeroshot_train.csv ./scripts/finetuning_csv/nn5_daily_dataset_zeroshot_train.csv
+      # aws s3 cp s3://mosaicml-internal-checkpoints-shared/kushal/chronos-zeroshot-data/nn5_weekly_dataset_zeroshot_train.csv ./scripts/finetuning_csv/nn5_weekly_dataset_zeroshot_train.csv
+      # aws s3 cp s3://mosaicml-internal-checkpoints-shared/kushal/chronos-zeroshot-data/tourism_monthly_dataset_zeroshot_train.csv ./scripts/finetuning_csv/tourism_monthly_dataset_zeroshot_train.csv
+      # aws s3 cp s3://mosaicml-internal-checkpoints-shared/kushal/chronos-zeroshot-data/tourism_quarterly_dataset_zeroshot_train.csv ./scripts/finetuning_csv/tourism_quarterly_dataset_zeroshot_train.csv
+      # aws s3 cp s3://mosaicml-internal-checkpoints-shared/kushal/chronos-zeroshot-data/tourism_yearly_dataset_zeroshot_train.csv ./scripts/finetuning_csv/tourism_yearly_dataset_zeroshot_train.csv
+      # aws s3 cp s3://mosaicml-internal-checkpoints-shared/kushal/chronos-zeroshot-data/traffic_hourly_dataset_zeroshot_train.csv ./scripts/finetuning_csv/traffic_hourly_dataset_zeroshot_train.csv
+      aws s3 cp s3://mosaicml-internal-checkpoints-shared/kushal/chronos-zeroshot-data/weather_dataset_new_zeroshot_train.csv ./scripts/finetuning_csv/weather_dataset_new_zeroshot_train.csv
+      ls ./scripts/finetuning_csv/
+
+      python3 scripts/forecasting_pretrained_script.py
