@@ -14,14 +14,14 @@ compute:
   instance: oci.bm.gpu.h100.8
 integrations:
   - integration_type: git_repo
-    git_repo: kushalkodn-db/chronos-forecasting-old
+    git_repo: kushal-kodnad_data/chronos-forecasting-reproduction-old
 
 command: |2-
 
       pip install pandas==2.1.4
       pip install gluonts pandas~=2.1.4
       pip install xlrd==2.0.1
-      cd chronos-forecasting-old
+      cd chronos-forecasting-reproduction-old
       mkdir ~/.gluonts
       mkdir ~/.gluonts/datasets
       mv ./scripts/M3C.xls ~/.gluonts/datasets/M3C.xls
