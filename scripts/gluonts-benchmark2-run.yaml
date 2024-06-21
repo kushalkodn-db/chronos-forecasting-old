@@ -22,6 +22,7 @@ command: |2-
       pip install gluonts pandas~=2.1.4
       pip install xlrd==2.0.1
       cd chronos-forecasting-reproduction-old
+      pip install git+https://github.com/amazon-science/chronos-forecasting.git
       mkdir ~/.gluonts
       mkdir ~/.gluonts/datasets
       mv ./scripts/M3C.xls ~/.gluonts/datasets/M3C.xls
